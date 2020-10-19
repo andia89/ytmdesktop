@@ -620,11 +620,7 @@ function createWindow() {
     mainWindow.on('close', function (e) {
         if (settingsProvider.get('settings-keep-background')) {
             e.preventDefault()
-            if (settingsProvider.get('settings-tray-icon')) {
-                mainWindow.hide()
-            } else {
-                mainWindow.minimize()
-            }
+            mainWindow.hide()
         } else {
             app.exit()
         }
@@ -957,6 +953,17 @@ function createWindow() {
             updateStatusBar()
             tray.setShinyTray()
         }
+    })
+
+    ipcMain.on('closed', (_) => {
+        mainWindow = null
+        if (process.platform !== 'darwin') {
+            app.quit()
+        }
+    })
+
+    ipcMain.on('show', (_) => {
+        mainWindow.show()
     })
 
     ipcMain.on('btn-update-clicked', () => {
