@@ -16,7 +16,6 @@ const settingsOnDidChange = (key, cb) => {
 
 window.addEventListener('load', () => {
     createContextMenu()
-
     const { hostname } = window.location
     if (hostname == 'music.youtube.com') {
         createTopMiddleContent()
@@ -305,6 +304,25 @@ function createTopRightContent() {
     // ADD BUTTONS TO RIGHT CONTENT (side to the photo)
     try {
         const right_content = document.getElementById('right-content')
+
+        //SHUTDOWN
+
+        const elementShutdown = document.createElement('i')
+        elementShutdown.id = 'ytmd_shutdown'
+        elementShutdown.title = translate('LABEL_SHUTDOWN')
+        elementShutdown.classList.add(
+            'material-icons',
+            'pointer',
+            'shine',
+            'ytmd-icons'
+        )
+        elementShutdown.innerText = 'power_settings_new'
+
+        elementShutdown.addEventListener('click', function () {
+            ipcRenderer.send('closed')
+        })
+
+        right_content.prepend(elementShutdown)
 
         // SETTINGS
         const elementSettings = document.createElement('i')
