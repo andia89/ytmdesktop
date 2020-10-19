@@ -620,11 +620,7 @@ function createWindow() {
     mainWindow.on('close', function (e) {
         if (settingsProvider.get('settings-keep-background')) {
             e.preventDefault()
-            if (settingsProvider.get('settings-tray-icon')) {
-                mainWindow.hide()
-            } else {
-                mainWindow.minimize()
-            }
+            mainWindow.hide()
         } else {
             app.exit()
         }
