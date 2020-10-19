@@ -963,6 +963,13 @@ function createWindow() {
         mainWindow.show()
     })
 
+    ipcMain.on('closed', (_) => {
+        mainWindow = null
+        if (process.platform !== 'darwin') {
+            app.quit()
+        }
+    })
+
     ipcMain.on('btn-update-clicked', () => {
         updater.quitAndInstall()
     })
