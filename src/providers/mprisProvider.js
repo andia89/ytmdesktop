@@ -12,7 +12,8 @@ class Mpris {
         this.player = new mpris({
             name: 'youtubemusic',
             identity: 'Youtube Music',
-            supportedUriSchemes: ['file'],
+            supportedUriSchemes: ['file', 'data'],
+            desktopEntry: 'youtube-music-desktop-player',
             supportedMimeTypes: ['audio/mpeg', 'application/ogg'],
             supportedInterfaces: ['player'],
             canRaise: true,

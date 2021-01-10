@@ -111,10 +111,6 @@ if (
     }
 }
 
-if (isLinux()) {
-    mprisProvider.start()
-}
-
 if (isMac()) {
     settingsProvider.set(
         'settings-shiny-tray-dark',
@@ -337,6 +333,9 @@ function createWindow() {
         if (!infoPlayerProvider.hasInitialized()) {
             infoPlayerProvider.init(view)
             if (isLinux()) {
+                if (!mprisProvider._isInitialized) {
+                    mprisProvider.start()
+                }
                 mprisProvider.setRealPlayer(infoPlayerProvider) //this lets us keep track of the current time in playback.
             }
         }
